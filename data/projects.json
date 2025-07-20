@@ -5,7 +5,7 @@
     "progress": 83,
     "showRepo": true,
     "priority": 1,
-    "latestCommit": "test"
+    "latestCommit": "补全翻译 (2025-07-19T09:50:45Z)"
   },
   {
     "name": "DG-LAB",
@@ -13,6 +13,6 @@
     "progress": 90,
     "showRepo": true,
     "priority": 2,
-    "latestCommit": "test2"
+    "latestCommit": "重构：改为使用包 (2025-07-14T07:40:50Z)"
   }
 ]
