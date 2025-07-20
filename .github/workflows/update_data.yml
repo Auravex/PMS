@@ -8,7 +8,6 @@ on:
 jobs:
   update-commits:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,7 +29,6 @@ jobs:
         run: |
           python << 'EOF'
           import json, requests, os
-
           token = os.environ['GITHUB_TOKEN']
           headers = {'Authorization': f'token {token}'}
 
@@ -78,3 +76,4 @@ jobs:
           else
             git commit -m "Update latest commit info"
             git push
+          fi
