@@ -1,0 +1,18 @@
+[
+  {
+    "name": "JGSL",
+    "repo": "https://github.com/Jimmy32767255/JimGrasscutterServerLauncher",
+    "progress": 83,
+    "showRepo": true,
+    "priority": 1,
+    "latestCommit": "test"
+  },
+  {
+    "name": "DG-LAB",
+    "repo": "https://github.com/Jimmy32767255/DG-LAB-V3-SOCKET-To-V2-BLE",
+    "progress": 90,
+    "showRepo": true,
+    "priority": 2,
+    "latestCommit": "test2"
+  }
+]

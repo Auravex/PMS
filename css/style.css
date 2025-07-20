@@ -1,0 +1,16 @@
+body {
+    background-color: #f5f5f5;
+}
+.card {
+    margin: 10px 0;
+}
+.progress {
+    height: 10px;
+}
+.card-title {
+    font-size: 1.4em;
+}
+#calendar {
+    max-width: 100%;
+    margin: 0 auto;
+}

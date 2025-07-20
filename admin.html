@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>管理页面</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdn-js.download.ac.cn/PMS/css/materialize.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://cdn-js.download.ac.cn/PMS/icon.json?family=Material+Icons" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h3 class="center-align">项目管理 - 后台</h3>
+    <!-- 项目列表 -->
+    <h5>项目列表（拖拽调整优先级）</h5>
+    <div class="row" id="projects-admin">
+        <!-- js/admin.js 动态生成可编辑卡片 -->
+    </div>
+    <!-- 日程管理 -->
+    <h5>日程管理</h5>
+    <!-- 添加日程表单 -->
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="new-proj-select">
+                        <option value="" disabled selected>选择项目</option>
+                    </select>
+                    <label>所属项目</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="datetime-local" id="new-event-time">
+                    <label for="new-event-time" class="active">时间</label>
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" id="new-event-note">
+                    <label for="new-event-note">备注</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="button" onclick="addScheduleItem()">添加日程</button>
+        </form>
+    </div>
+    <!-- 日程列表表格 -->
+    <table class="striped">
+        <thead>
+        <tr><th>项目</th><th>时间</th><th>备注</th><th>操作</th></tr>
+        </thead>
+        <tbody id="schedule-admin"></tbody>
+    </table>
+</div>
+
+<!-- 引入 SortableJS 用于拖拽:contentReference[oaicite:6]{index=6} -->
+<script src="https://cdn-js.download.ac.cn/Sortable.min.js"></script>
+<!-- 管理脚本 -->
+<script src="js/admin.js"></script>
+<script src="https://cdn-js.download.ac.cn/materialize.min.js"></script>
+</body>
+</html>

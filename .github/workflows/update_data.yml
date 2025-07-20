@@ -1,0 +1,74 @@
+on:
+  schedule:
+    - cron: '*/15 * * * *' # 每15分钟
+  workflow_dispatch:     # 手动触发
+
+jobs:
+  update-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Update projects.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - << 'PYCODE'
+  import json, requests, os
+  
+  token = os.environ['GITHUB_TOKEN']
+headers = {'Authorization': f'token {token}'}
+
+with open('data/projects.json', 'r', encoding='utf-8') as f:
+  projects = json.load(f)
+
+for proj in projects:
+  repo = proj.get('repo', '').replace('https://github.com/', '').rstrip('/')
+  if not repo: continue
+  url_branches = f'https://api.github.com/repos/{repo}/branches'
+  branches_resp = requests.get(url_branches, headers=headers)
+  if branches_resp.status_code != 200: continue
+  branches = branches_resp.json()
+  latest_date = None
+  latest_info = ""
+  for br in branches:
+    sha = br['commit']['sha']
+    url_commit = f'https://api.github.com/repos/{repo}/commits/{sha}'
+    commit_resp = requests.get(url_commit, headers=headers)
+    if commit_resp.status_code != 200: continue
+    commit_data = commit_resp.json()['commit']
+    date = commit_data['committer']['date']
+    message = commit_data['message']
+    if not latest_date or date > latest_date:
+      latest_date = date
+      latest_info = f"{message} ({date})"
+  if latest_info:
+    proj['latestCommit'] = latest_info
+
+with open('data/projects.json', 'w', encoding='utf-8') as f:
+  json.dump(projects, f, ensure_ascii=False, indent=2)
+  PYCODE
+
+- name: Commit changes (only if needed)
+  run: |
+    git config user.name "github-actions[bot]"
+    git config user.email "github-actions[bot]@users.noreply.github.com"
+    git add data/projects.json
+    if git diff --cached --quiet; then
+      echo "No changes to commit"
+    else
+      git commit -m "Update latest commit info"
+      git push
+

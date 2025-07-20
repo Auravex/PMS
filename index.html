@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>项目进度公示面板</title>
+  <link href="https://cdn-js.download.ac.cn/PMS/css/materialize.min.css" rel="stylesheet">
+  <link href="https://cdn-js.download.ac.cn/PMS/icon.json?family=Material+Icons" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h3 class="center-align">项目进度</h3>
+    <div class="row">
+      <!-- 左侧项目列表 -->
+      <div class="col s12 m8" id="projects-container">
+        <!-- 项目卡片由 js/main.js 动态插入 -->
+      </div>
+      <!-- 右侧日历 -->
+      <div class="col s12 m4">
+        <h5 class="center-align">日程安排</h5>
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 脚本依赖 -->
+  <script src="https://cdn-js.download.ac.cn/fullcalendar.index.global.min.js"></script>
+  <script src="https://cdn-js.download.ac.cn/fullcalendar.locales-all.min.js"></script>
+  <!-- 初始化 FullCalendar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'zh-cn',
+        headerToolbar: { left: '', center: 'title', right: '' },
+        events: [], // 通过 js/main.js 加载事件数据
+        eventDidMount: function(info) {
+          // 悬停显示项目和备注（可集成 Tooltip.js 具体实现，此处简单实现 title）
+          if(info.event.extendedProps.note){
+            info.el.setAttribute('title', info.event.title + '：' + info.event.extendedProps.note);
+          }
+        }
+      });
+      window.fcCalendar = calendar; // 暴露全局以便更新事件
+      calendar.render();
+    });
+  </script>
+
+  <!-- 主脚本 -->
+  <script src="js/main.js"></script>
+  <!-- Materialize JS (需放在此处) -->
+  <script src="https://cdn-js.download.ac.cn/materialize.min.js"></script>
+</body>
+</html>
