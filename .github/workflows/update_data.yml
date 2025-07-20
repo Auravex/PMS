@@ -1,5 +1,8 @@
 name: Update project latest commits
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '*/15 * * * *' # 每15分钟
