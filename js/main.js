@@ -1,5 +1,5 @@
 // 加载并渲染项目卡片
-fetch('..data/projects.json')
+fetch('../data/projects.json')
     .then(res => res.json())
     .then(projects => {
         // 按优先级升序排列
@@ -23,7 +23,7 @@ fetch('..data/projects.json')
     });
 
 // 加载并渲染日程事件
-fetch('..data/schedule.json')
+fetch('../data/schedule.json')
     .then(res => res.json())
     .then(events => {
         // 遍历事件并添加到 FullCalendar

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let projectsData = [], scheduleData = [];
 
 // 加载项目数据并渲染可编辑卡片
-fetch('..data/projects.json')
+fetch('../data/projects.json')
     .then(res => res.json())
     .then(projects => {
         projectsData = projects;
@@ -78,7 +78,7 @@ function renderSchedule() {
 }
 
 // 初次加载日程数据
-fetch('..data/schedule.json')
+fetch('../schedule.json')
     .then(res => res.json())
     .then(events => {
         scheduleData = events;
