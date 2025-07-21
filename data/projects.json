@@ -5,7 +5,7 @@
     "progress": 83,
     "showRepo": true,
     "priority": 1,
-    "latestCommit": "支持同时运行多个实例并将mongod.exe占用端口视为正常情况 (2025-07-21T05:58:24Z)"
+    "latestCommit": "添加开发文档 (2025-07-21T13:04:50Z)"
   },
   {
     "name": "DG-LAB",
